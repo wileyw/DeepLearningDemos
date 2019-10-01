@@ -7,3 +7,7 @@ Deep Learning Experiment Code.
 3. GANs
 4. FaceNet
 5. Word2Vec
+6. Sentiment Analysis
+7. Semantic Segmentation
+8. Text Classification
+9. Image Style Transfer
