@@ -160,9 +160,8 @@ def training_loop(train_dataloader, opts):
             # FILL THIS IN
             # 1. Compute the discriminator loss on real images
             d_results = D(real_images)
-            # mse_criterion = nn.MSELoss()
-            # D_real_loss = mse_criterion(d_results, labels)
-            D_real_loss = (d_results - 1).pow(2).mean()
+            mse_criterion = nn.MSELoss()
+            D_real_loss = mse_criterion(d_results, labels)
 
             # 2. Sample noise
             # TODO:  How to get dim?
@@ -173,7 +172,9 @@ def training_loop(train_dataloader, opts):
 
             # 4. Compute the discriminator loss on the fake images
             g_results = D(fake_images)
-            D_fake_loss = g_results.pow(2).mean()
+            # D_fake_loss = g_results.pow(2).mean()
+            labels.fill_(0)
+            D_fake_loss = mse_criterion(g_results, labels)
 
             # 5. Compute the total discriminator loss
             D_total_loss = D_real_loss + D_fake_loss
@@ -196,7 +197,9 @@ def training_loop(train_dataloader, opts):
 
             # 3. Compute the generator loss
             g_results = D(fake_images)
-            G_loss = (g_results - 1).pow(2).mean()
+            labels.fill_(1)
+            # G_loss = (g_results - 1).pow(2).mean()
+            G_loss = mse_criterion(g_results, labels)
 
             G_loss.backward()
             g_optimizer.step()
