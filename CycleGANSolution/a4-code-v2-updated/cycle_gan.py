@@ -34,6 +34,7 @@ import torch.optim as optim
 import numpy as np
 import scipy
 import scipy.misc
+import imageio
 
 # Local imports
 import utils
@@ -163,12 +164,12 @@ def save_samples(iteration, fixed_Y, fixed_X, G_YtoX, G_XtoY, opts):
 
     merged = merge_images(X, fake_Y, opts)
     path = os.path.join(opts.sample_dir, 'sample-{:06d}-X-Y.png'.format(iteration))
-    scipy.misc.imsave(path, merged)
+    imageio.imwrite(path, merged)
     print('Saved {}'.format(path))
 
     merged = merge_images(Y, fake_X, opts)
     path = os.path.join(opts.sample_dir, 'sample-{:06d}-Y-X.png'.format(iteration))
-    scipy.misc.imsave(path, merged)
+    imageio.imwrite(path, merged)
     print('Saved {}'.format(path))
 
 
