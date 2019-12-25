@@ -22,6 +22,17 @@ Minutes (10/31/2019):
 • NLP. Text content classification. (Michael Present)
 • Google Colab content. (Michael)
 
+## Specific Interesting Architectures
+Note:
+1. Hour glass
+1. U-net
+1. Dense-net/Resnet
+1. Mobilenet v3
+1. SqueezeNet
+
+## ICCV
+ICCV: http://iccv2019.thecvf.com/program/main_conference#poster11
+
 ## Ideas
 1. WaveNet
 2. Deep Reinforcement Learning
