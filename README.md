@@ -33,6 +33,7 @@ Note:
 ## ICCV
 ICCV: http://iccv2019.thecvf.com/program/main_conference#poster11
 1. Plan is to summarize ICCV and present to group
+1. [Best Paper Award](https://www.youtube.com/watch?v=mdAcPe74tZI&feature=youtu.be&t=3217)
 
 ## Ideas
 1. WaveNet
