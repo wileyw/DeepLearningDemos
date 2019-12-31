@@ -144,6 +144,7 @@ def training_loop(train_dataloader, opts):
 
     total_train_iters = opts.num_epochs * len(train_dataloader)
 
+    mse_criterion = nn.MSELoss()
     for epoch in range(opts.num_epochs):
 
         for batch in train_dataloader:
@@ -160,8 +161,8 @@ def training_loop(train_dataloader, opts):
             # FILL THIS IN
             # 1. Compute the discriminator loss on real images
             d_results = D(real_images)
-            mse_criterion = nn.MSELoss()
-            D_real_loss = mse_criterion(d_results, labels)
+            real_labels = torch.full((len(real_images),), 1.0)
+            D_real_loss = mse_criterion(d_results, real_labels)
 
             # 2. Sample noise
             # TODO:  How to get dim?
@@ -173,8 +174,8 @@ def training_loop(train_dataloader, opts):
             # 4. Compute the discriminator loss on the fake images
             g_results = D(fake_images)
             # D_fake_loss = g_results.pow(2).mean()
-            labels.fill_(0)
-            D_fake_loss = mse_criterion(g_results, labels)
+            fake_labels = torch.full((len(fake_images),), 0.0)
+            D_fake_loss = mse_criterion(g_results, fake_labels)
 
             # 5. Compute the total discriminator loss
             D_total_loss = D_real_loss + D_fake_loss
@@ -197,9 +198,9 @@ def training_loop(train_dataloader, opts):
 
             # 3. Compute the generator loss
             g_results = D(fake_images)
-            labels.fill_(1)
+            real_labels = torch.full((len(fake_images),), 1.0)
             # G_loss = (g_results - 1).pow(2).mean()
-            G_loss = mse_criterion(g_results, labels)
+            G_loss = mse_criterion(g_results, real_labels)
 
             G_loss.backward()
             g_optimizer.step()
@@ -208,7 +209,7 @@ def training_loop(train_dataloader, opts):
             # Print the log info
             if iteration % opts.log_step == 0:
                 print('Iteration [{:4d}/{:4d}] | D_real_loss: {:6.4f} | D_fake_loss: {:6.4f} | G_loss: {:6.4f}'.format(
-                       iteration, total_train_iters, D_real_loss.data[0], D_fake_loss.data[0], G_loss.data[0]))
+                       iteration, total_train_iters, D_real_loss.data, D_fake_loss.data, G_loss.data))
 
             # Save the generated samples
             if iteration % opts.sample_every == 0:

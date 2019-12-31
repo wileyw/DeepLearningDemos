@@ -125,6 +125,16 @@ class CycleGenerator(nn.Module):
         ##   FILL THIS IN: CREATE ARCHITECTURE   ##
         ###########################################
 
+        kernel_size = 4
+        self.conv1 = conv(3, conv_dim, kernel_size)
+        self.conv2 = conv(conv_dim, conv_dim * 2, kernel_size)
+
+        self.resnet_block = ResnetBlock(conv_dim * 2)
+
+        self.deconv1 = deconv(conv_dim * 2, conv_dim, kernel_size)
+        self.deconv2 = deconv(conv_dim, 3, kernel_size, 2, batch_norm=False)
+
+
         # 1. Define the encoder part of the generator (that extracts features from the input image)
         # self.conv1 = conv(...)
         # self.conv2 = conv(...)
