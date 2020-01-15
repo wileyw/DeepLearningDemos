@@ -21,6 +21,7 @@ Minutes (12/31/2019):
 • Google Colab content, run CycleGAN on GPU instead of CPU (Mike)
 • Review ICCV papers (Mike, Wiley)
 • Implement something with Transformers (Mike)
+- Implement SinGAN (Mike, Wiley)
 
 ## Specific Interesting Architectures
 Note:
