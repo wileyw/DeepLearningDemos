@@ -14,14 +14,11 @@ https://arxiv.org/pdf/1906.01529.pdf
 https://machinelearningmastery.com/how-to-evaluate-generative-adversarial-networks/
 
 ## Current Plan
-Minutes (12/31/2019):
-• How can we evaluate the results? Not just qualitative, but also quantitatively. (John)
-• Find out what GAN data can be used?...function, or different training method. (John)
-• 30 minutes blog post tutorial write up framework (Wiley, Mike)
-• Google Colab content, run CycleGAN on GPU instead of CPU (Mike)
-• Review ICCV papers (Mike, Wiley)
-• Implement something with Transformers (Mike)
-- Implement SinGAN (Mike, Wiley)
+- How can we evaluate the results? Not just qualitative, but also quantitatively. (John)
+- Find out what GAN data can be used?...function, or different training method. (John)
+- 30 minutes blog post tutorial write up framework (Wiley, Mike)
+- Review ICCV papers (Mike, Wiley)
+- Pull out function to re-implement from SinGAN (Mike)
 
 ## Specific Interesting Architectures
 Note:
