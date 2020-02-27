@@ -18,7 +18,7 @@ https://machinelearningmastery.com/how-to-evaluate-generative-adversarial-networ
 - Find out what GAN data can be used?...function, or different training method. (John)
 - 30 minutes blog post tutorial write up framework (Wiley, Mike)
 - Review ICCV papers (Mike, Wiley)
-- Pull out function to re-implement from SinGAN (Mike)
+- Pull out functions (SinGAN.training.train_single_scale) and models (models.GeneratorConcatSkip2CleanAdd and models.WDiscriminator) to re-implement from SinGAN (Mike)
 
 ## Specific Interesting Architectures
 Note:
