@@ -19,6 +19,7 @@ https://machinelearningmastery.com/how-to-evaluate-generative-adversarial-networ
 - 30 minutes blog post tutorial write up framework (Wiley, Mike)
 - Review ICCV papers (Mike, Wiley)
 - Pull out functions (SinGAN.training.train_single_scale) and models (models.GeneratorConcatSkip2CleanAdd and models.WDiscriminator) to re-implement from SinGAN (Mike)
+- Run DoubleGAN on more images (Mike)
 
 ## Specific Interesting Architectures
 Note:
