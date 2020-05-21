@@ -2,7 +2,7 @@
 Deep Learning Experiment Code.
 
 # Blog Posts
-[Making SinGAN Double](https://medium.com/@deepganteam/making-singan-double-8568490b572e)
+1. [Making SinGAN Double](https://medium.com/@deepganteam/making-singan-double-8568490b572e)
 
 ## DCGan Tutorial
 https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html
