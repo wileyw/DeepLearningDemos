@@ -4,6 +4,9 @@ Deep Learning Experiment Code.
 # Blog Posts
 1. [Making SinGAN Double](https://medium.com/@deepganteam/making-singan-double-8568490b572e)
 
+## Project Ideas
+1. https://www.cs.toronto.edu/~graves/handwriting.html
+
 ## DCGan Tutorial
 https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html
 
@@ -37,13 +40,3 @@ ICCV: http://iccv2019.thecvf.com/program/main_conference#poster11
 1. Plan is to summarize ICCV and present to group
 1. [Best Paper Award](https://www.youtube.com/watch?v=mdAcPe74tZI&feature=youtu.be&t=3217)
 
-## Ideas
-1. WaveNet
-2. Deep Reinforcement Learning
-3. GANs
-4. FaceNet
-5. Word2Vec
-6. Sentiment Analysis
-7. Semantic Segmentation
-8. Text Classification
-9. Image Style Transfer
