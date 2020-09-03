@@ -2,6 +2,7 @@
 Deep Learning Experiment Code.
 
 # Blog Posts
+1. [What are Transformers?](https://medium.com/@deepganteam/what-are-transformers-b687f2bcdf49)
 1. [Searching for Better Neural Architecture Search](https://medium.com/@deepganteam/searching-for-better-neural-architecture-search-ea91338caa11) (2020-06-17)
 1. [Making SinGAN Double](https://medium.com/@deepganteam/making-singan-double-8568490b572e) (2020-04-15)
 
