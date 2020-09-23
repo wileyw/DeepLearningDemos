@@ -131,4 +131,6 @@ if __name__ == '__main__':
         dr.test_df['x'][1][:dr.test_df['x_len'][1]],
     ]
 
+    import ipdb; ipdb.set_trace()
+
     _draw(strokes, lines, "test.svg", stroke_colors=stroke_colors, stroke_widths=stroke_widths)
