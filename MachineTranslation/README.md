@@ -1,5 +1,12 @@
 # Machine Translation
 
+```
+# Download the dataset
+wget https://www.manythings.org/anki/fra-eng.zip
+
+unzip fra-eng.zip
+```
+
 ## Tutorials
 - https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html#
     - [Link to Colab Notebook](https://colab.research.google.com/github/pytorch/tutorials/blob/gh-pages/_downloads/a60617788061539b5449701ae76aee56/seq2seq_translation_tutorial.ipynb)
