@@ -83,6 +83,15 @@ class Uint8LogMelFeatureExtractor(object):
   def _frame_duration_seconds(self, num_spectra):
     return (self.spectrogram_window_length_seconds +
             (num_spectra - 1) * self.spectrogram_hop_length_seconds)
+  def compute_spectrogram_and_normalize(self, audio_samples, audio_sample_rate_hz):
+    spectrogram = self._compute_spectrogram(audio_samples, audio_sample_rate_hz)
+
+    spectrogram -= np.mean(spectrogram, axis=0)
+    if self._norm_factor:
+      spectrogram /= self._norm_factor * np.std(spectrogram, axis=0)
+      spectrogram += 1
+      spectrogram *= 127.5
+    return np.maximum(0, np.minimum(255, spectrogram)).astype(np.float32)
 
   def _compute_spectrogram(self, audio_samples, audio_sample_rate_hz):
     """Compute log-mel spectrogram and scale it to uint8."""
@@ -166,7 +175,8 @@ def read_labels(filename):
   # The labels file can be made something like this.
   f = open(filename, "r")
   lines = f.readlines()
-  return ['negative'] + [l.rstrip() for l in lines]
+  #return ['negative'] + [l.rstrip() for l in lines]
+  return [l.rstrip() for l in lines]
 
 
 def read_commands(filename):
@@ -230,7 +240,7 @@ def add_model_flags(parser):
                       help="Optional: Input source microphone ID.")
   parser.add_argument(
       "--num_frames_hop",
-      default=33,
+      default=49,
       help="Optional: Number of frames to wait between model inference "
       "calls. Smaller numbers will reduce the latancy while increasing "
       "compute cost. Must devide 198. Defaults to 33.")
@@ -276,10 +286,39 @@ def classify_audio(audio_device_index, interpreter, labels_file,
   logger.info("Loaded commands: %s", str(commands))
   logger.info("Recording")
   timed_out = False
+
+  # Testing
+  from scipy import special
+  if False:
+    sample_data = 'data/mini_speech_commands/down/e71b4ce6_nohash_1.wav'
+
+    import tensorflow as tf
+    import os
+    def decode_audio(audio_binary):
+      audio, _ = tf.audio.decode_wav(audio_binary)
+      return tf.squeeze(audio, axis=-1)
+
+    def get_label(file_path):
+      parts = tf.strings.split(file_path, os.path.sep)
+
+      # Note: You'll use indexing here instead of tuple unpacking to enable this 
+      # to work in a TensorFlow graph.
+      return parts[-2]
+
+    def get_waveform_and_label(file_path):
+      label = get_label(file_path)
+      audio_binary = tf.io.read_file(file_path)
+      waveform = decode_audio(audio_binary)
+      return waveform, label
+    waveform, label = get_waveform_and_label(sample_data)
+    print(waveform.shape)
+  # End Testing
+
   with recorder:
     last_detection = -1
     while not timed_out:
       spectrogram = feature_extractor.get_next_spectrogram(recorder).astype('float32')
+      #spectrogram = feature_extractor.compute_spectrogram_and_normalize(waveform.numpy(), 16000)
       # plot_spectrogram(spectrogram)
       spectrogram = np.expand_dims(spectrogram, axis=-1)
       spectrogram = np.expand_dims(spectrogram, axis=0)
@@ -288,6 +327,10 @@ def classify_audio(audio_device_index, interpreter, labels_file,
       # set_input(interpreter, spectrogram.flatten())
       interpreter.invoke()
       result = get_output(interpreter)
+      # NOTE: Add softmax
+      # NOTE: Remove negative label
+      result = special.softmax(result)
+      print(result)
       if result_callback:
         result_callback(result, commands, labels)
       if dectection_callback:
