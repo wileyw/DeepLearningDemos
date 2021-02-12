@@ -18,7 +18,7 @@ def main():
     for mp3_path in glob.glob(os.path.join(INPUT_DIR, '*.mp3')):
         name = os.path.split(mp3_path)[1][:-len('.mp3')]
         output_path = os.path.join(OUTPUT_DIR, name + '.wav')
-        os.system('ffmpeg -i "{}" "{}"'.format(mp3_path, output_path))
+        os.system('ffmpeg -i "{}" -ar 16000 "{}"'.format(mp3_path, output_path))
         print(mp3_path)
         print(output_path)
 
