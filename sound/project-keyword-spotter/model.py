@@ -23,12 +23,12 @@ import audio_recorder
 import mel_features
 import numpy as np
 import queue
-# import tflite_runtime.interpreter as tflite
-import tensorflow.lite as tflite
+import tflite_runtime.interpreter as tflite
+# import tensorflow.lite as tflite
 import platform
 
-import matplotlib.pyplot as plt
-plt.ion()
+# import matplotlib.pyplot as plt
+# plt.ion()
 
 
 EDGETPU_SHARED_LIB = {
@@ -259,6 +259,10 @@ def plot_spectrogram(input_data):
   plt.draw()
   plt.pause(0.001)
 
+def softmax(x, axis=None):
+  x = x - x.max(axis=axis, keepdims=True)
+  y = np.exp(x)
+  return y / y.sum(axis=axis, keepdims=True)
 
 def classify_audio(audio_device_index, interpreter, labels_file,
                    commands_file=None,
@@ -329,7 +333,7 @@ def classify_audio(audio_device_index, interpreter, labels_file,
       result = get_output(interpreter)
       # NOTE: Add softmax
       # NOTE: Remove negative label
-      result = special.softmax(result)
+      result = softmax(result)
       #print(result)
       if result_callback:
         result_callback(result, commands, labels)
