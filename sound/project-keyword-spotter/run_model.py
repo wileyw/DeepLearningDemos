@@ -27,7 +27,7 @@ import model
 import numpy as np
 
 
-def print_results(result, commands, labels, top=3):
+def print_results(result, commands, labels, top=1):
   """Example callback function that prints the passed detections."""
   top_results = np.argsort(-result)[:top]
   for p in range(top):
@@ -52,7 +52,7 @@ def main():
   interpreter.allocate_tensors()
   mic = args.mic if args.mic is None else int(args.mic)
   model.classify_audio(mic, interpreter,
-                       labels_file="config/labels_gc2.raw.txt",
+                       labels_file="config/labels_simple_audio.txt",
                        result_callback=print_results,
                        sample_rate_hz=int(args.sample_rate_hz),
                        num_frames_hop=int(args.num_frames_hop))

@@ -330,7 +330,7 @@ def classify_audio(audio_device_index, interpreter, labels_file,
       # NOTE: Add softmax
       # NOTE: Remove negative label
       result = special.softmax(result)
-      print(result)
+      #print(result)
       if result_callback:
         result_callback(result, commands, labels)
       if dectection_callback:
