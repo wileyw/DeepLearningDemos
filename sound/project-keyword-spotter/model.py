@@ -305,7 +305,6 @@ def classify_audio(audio_device_index, interpreter, labels_file,
   timed_out = False
 
   # Testing
-  from scipy import special
   if False:
     sample_data = 'data/mini_speech_commands/down/e71b4ce6_nohash_1.wav'
 
