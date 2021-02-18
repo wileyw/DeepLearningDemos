@@ -221,13 +221,13 @@ def set_input(interpreter, data):
 
 def make_interpreter(model_file):
     model_file, *device = model_file.split('@')
-    # return tflite.Interpreter(
-    #   model_path=model_file,
-    #   experimental_delegates=[
-    #       tflite.load_delegate(EDGETPU_SHARED_LIB,
-    #                            {'device': device[0]} if device else {})
-    #   ])
-    return tflite.Interpreter(model_path="models/model.tflite")
+    return tflite.Interpreter(
+      model_path=model_file,
+      experimental_delegates=[
+          tflite.load_delegate(EDGETPU_SHARED_LIB,
+                               {'device': device[0]} if device else {})
+      ])
+    # return tflite.Interpreter(model_path=model_file)
 
 
 def add_model_flags(parser):
