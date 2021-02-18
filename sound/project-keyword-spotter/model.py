@@ -226,21 +226,17 @@ def set_input(interpreter, data):
 
 def make_interpreter(model_file):
     model_file, *device = model_file.split('@')
-    if 'edgetpu' in model_file:
-        new_model_file = model_file
-    else:
-        new_model_file = 'models/model.tflite'
 
-    if os.uname().sysname == 'Linux':
+    if os.uname().sysname == 'Linux' and 'edgetpu' in model_file:
         return tflite.Interpreter(
-            model_path=new_model_file,
+            model_path=model_file,
             experimental_delegates=[
             tflite.load_delegate(EDGETPU_SHARED_LIB,
                                 {'device': device[0]} if device else {})
         ])
     else:
         # If sysname == 'Darwin'
-        return tflite.Interpreter(model_path=new_model_file)
+        return tflite.Interpreter(model_path=model_file)
 
 
 def add_model_flags(parser):
