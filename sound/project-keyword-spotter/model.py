@@ -23,9 +23,14 @@ import audio_recorder
 import mel_features
 import numpy as np
 import queue
-import tflite_runtime.interpreter as tflite
-# import tensorflow.lite as tflite
+import os
+
+if os.uname().sysname == 'Linux':
+    import tflite_runtime.interpreter as tflite
+else:
+    import tensorflow.lite as tflite
 import platform
+
 
 # import matplotlib.pyplot as plt
 # plt.ion()
@@ -221,13 +226,21 @@ def set_input(interpreter, data):
 
 def make_interpreter(model_file):
     model_file, *device = model_file.split('@')
-    return tflite.Interpreter(
-      model_path=model_file,
-      experimental_delegates=[
-          tflite.load_delegate(EDGETPU_SHARED_LIB,
-                               {'device': device[0]} if device else {})
-      ])
-    # return tflite.Interpreter(model_path=model_file)
+    if 'edgetpu' in model_file:
+        new_model_file = model_file
+    else:
+        new_model_file = 'models/model.tflite'
+
+    if os.uname().sysname == 'Linux':
+        return tflite.Interpreter(
+            model_path=new_model_file,
+            experimental_delegates=[
+            tflite.load_delegate(EDGETPU_SHARED_LIB,
+                                {'device': device[0]} if device else {})
+        ])
+    else:
+        # If sysname == 'Darwin'
+        return tflite.Interpreter(model_path=new_model_file)
 
 
 def add_model_flags(parser):
