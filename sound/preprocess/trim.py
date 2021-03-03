@@ -22,7 +22,7 @@ def main():
     file_names = glob.glob(os.path.join(sys.argv[1], '*.wav'))
     for filename in file_names:
         print(filename)
-        os.system('/tmp/extract_loudest_section/gen/bin/extract_loudest_section {} {}'.format(filename, sys.argv[2]))
+        os.system('/tmp/extract_loudest_section/gen/bin/extract_loudest_section "{}" "{}"'.format(filename, sys.argv[2]))
 
 if __name__ == '__main__':
     main()
