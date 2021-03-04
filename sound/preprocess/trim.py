@@ -1,7 +1,13 @@
 """
+Convert to .wav
+ffmpeg -i input.m4a output.wav
+
 Split .wav files with ffmpeg:
 NAME=name.wav
 ffmpeg -i $NAME.wav -f segment -segment_time 2 -c copy one_second/$NAME%03d.wav
+
+python3 to_16000_wav.py INPUT_DIR OUTPUT_DIR
+python3 trim.py INPUT_DIR OUTPUT_DIR
 
 https://petewarden.com/2017/07/17/a-quick-hack-to-align-single-word-audio-recordings/
 
