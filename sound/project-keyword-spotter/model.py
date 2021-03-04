@@ -63,11 +63,11 @@ class Uint8LogMelFeatureExtractor(object):
   a specified number of spectral slices from an AudioRecorder.
   """
 
-  def __init__(self, num_frames_hop=49):
+  def __init__(self, num_frames_hop=48):
     self.spectrogram_window_length_seconds = 0.025
     self.spectrogram_hop_length_seconds = 0.010
-    self.num_mel_bins = 32
-    self.frame_length_spectra = 98
+    self.num_mel_bins = 64
+    self.frame_length_spectra = 96
     if self.frame_length_spectra % num_frames_hop:
         raise ValueError('Invalid num_frames_hop value (%d), '
                          'must devide %d' % (num_frames_hop,
@@ -249,7 +249,7 @@ def add_model_flags(parser):
                       help="Optional: Input source microphone ID.")
   parser.add_argument(
       "--num_frames_hop",
-      default=49,
+      default=48,
       help="Optional: Number of frames to wait between model inference "
       "calls. Smaller numbers will reduce the latancy while increasing "
       "compute cost. Must devide 198. Defaults to 33.")
@@ -330,7 +330,7 @@ def classify_audio(audio_device_index, interpreter, labels_file,
     last_detection = -1
     while not timed_out:
       spectrogram = feature_extractor.get_next_spectrogram(recorder).astype('float32')
-      #spectrogram = feature_extractor.compute_spectrogram_and_normalize(waveform.numpy(), 16000)
+      #spectrogram = feature_extractor.compute_spectrogram_and_normalize(waveform.numpy()[:15680], 16000)
       # plot_spectrogram(spectrogram)
       spectrogram = np.expand_dims(spectrogram, axis=-1)
       spectrogram = np.expand_dims(spectrogram, axis=0)
