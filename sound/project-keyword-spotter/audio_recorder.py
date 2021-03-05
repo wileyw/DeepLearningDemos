@@ -75,7 +75,7 @@ class AudioRecorder(object):
 
   # Timeout if we can't get a chunk from the queue for timeout_factor times the
   # chunk duration.
-  timeout_factor = 4
+  timeout_factor = 8
 
   def __init__(self, raw_audio_sample_rate_hz=48000,
                      downsample_factor=3,
