@@ -340,6 +340,14 @@ def classify_audio(audio_device_index, interpreter, labels_file,
     exit()
   yamnet.load_weights('yamnet.h5')
   yamnet_classes = yamnet_model.class_names('yamnet_class_map.csv')
+
+  import pygame
+  pygame.init()
+  screen = pygame.display.set_mode((640, 480))
+  font = pygame.font.Font(pygame.font.get_default_font(), 36 * 2)
+
+  text_surface = font.render('Hello world', True, (0, 0, 0))
+  GRAY = (200, 200, 200)
   # yamnet end testing
   with recorder:
     last_detection = -1
@@ -370,6 +378,23 @@ def classify_audio(audio_device_index, interpreter, labels_file,
       print(':\n' +
             '\n'.join('  {:12s}: {:.3f}'.format(yamnet_classes[i], prediction[i])
             for i in top5_i))
+      print('{}:{:.3f}'.format(yamnet_classes[42], prediction[42]))
+      print('{}:{:.3f}'.format(yamnet_classes[0], prediction[0]))
+      print('{}:{:.3f}'.format(yamnet_classes[494], prediction[494]))
+
+      target_predictions = prediction[42], prediction[0], prediction[494]
+      target_classes = yamnet_classes[42], yamnet_classes[0], yamnet_classes[494]
+      index = np.argsort(target_predictions)[::-1][0]
+      text1 = font.render(target_classes[index], True, (0, 0, 0))
+      screen.fill(GRAY)
+      screen.blit(text1, dest=(0, 0))
+      pygame.display.update()
+      '''
+      line = '{}:{:.3f}'.format(yamnet_classes[42], prediction[42])
+      label = Tk.Label(None, text=line, font=('Times', '18'), fg='blue')
+      label.pack()
+      label.mainloop()
+      '''
       # End
       """
       spectrogram = feature_extractor.get_next_spectrogram(recorder).astype('float32')
