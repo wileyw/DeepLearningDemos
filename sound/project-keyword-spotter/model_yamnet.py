@@ -344,6 +344,7 @@ def classify_audio(audio_device_index, interpreter, labels_file,
   import pygame
   pygame.init()
   screen = pygame.display.set_mode((640, 480))
+  font_header = pygame.font.Font(pygame.font.get_default_font(), 36)
   font = pygame.font.Font(pygame.font.get_default_font(), 36 * 2)
 
   text_surface = font.render('Hello world', True, (0, 0, 0))
@@ -385,9 +386,20 @@ def classify_audio(audio_device_index, interpreter, labels_file,
       target_predictions = prediction[42], prediction[0], prediction[494]
       target_classes = yamnet_classes[42], yamnet_classes[0], yamnet_classes[494]
       index = np.argsort(target_predictions)[::-1][0]
-      text1 = font.render(target_classes[index], True, (0, 0, 0))
+      black = (0, 0, 0)
+      green = (0, 255, 0)
+      red = (255, 0, 0)
+      if index == 0:
+        color = red
+      elif index == 1:
+        color = green
+      else:
+        color = black
+      text1 = font.render(target_classes[index], True, color)
+      header1 = font_header.render('R-zero Device Listening for Audio', True, (0, 0, 0))
       screen.fill(GRAY)
-      screen.blit(text1, dest=(0, 0))
+      screen.blit(header1, dest=(20, 100))
+      screen.blit(text1, dest=(200, 200))
       pygame.display.update()
       '''
       line = '{}:{:.3f}'.format(yamnet_classes[42], prediction[42])
