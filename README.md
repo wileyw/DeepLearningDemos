@@ -15,9 +15,6 @@ We're a team of Machine Learning Engineers that blog about advances in Deep Lear
 ## Project Ideas
 1. https://www.cs.toronto.edu/~graves/handwriting.html
 
-## GAN Evaluation
-https://machinelearningmastery.com/how-to-evaluate-generative-adversarial-networks/
-
 ## Specific Interesting Architectures
 Note:
 1. Hour glass
