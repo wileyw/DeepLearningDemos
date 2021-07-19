@@ -2,6 +2,7 @@
 We're a team of Machine Learning Engineers that blog about advances in Deep Learning.
 
 # 1. Blog Posts
+1. [Few Shot Learning from Scratch](https://deepganteam.medium.com/few-shot-learning-from-scratch-a3422b111e05) (2021-07-06)
 1. [Basic Policy Gradients with the Reparameterization Trick](https://deepganteam.medium.com/basic-policy-gradients-with-the-reparameterization-trick-24312c7dbcd) (2021-04-13)
 1. [A Little Rusty? ML Refresher on Linear Regression](https://deepganteam.medium.com/a-little-rusty-ml-refresher-on-linear-regression-76ef4afc6474) (2021-02-19)
 1. [Language Translation with Transformers in PyTorch](https://chatbotslife.com/language-translation-with-transformers-in-pytorch-ff8b32cf848?gi=df7018b86372) (2021-01-22)
