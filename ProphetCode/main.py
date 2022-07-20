@@ -15,6 +15,9 @@ def main():
         df = pd.read_csv('archive/GlobalLandTemperaturesByMajorCity.csv')
         df = df.rename(columns={"dt": "ds", "AverageTemperature": "y"})
         df = df[df['City'] == "New York"]
+        #df = df[df['City'] == "Sydney"]
+        #df = df[df['City'] == "Cape Town"]
+        #df = df[df['City'] == "New Delhi"]
         df = df[df.y.notnull()]
         print(df.columns)
         print(df.head())
